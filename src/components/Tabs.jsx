@@ -1,8 +1,8 @@
 import React from "react";
 
 const Tabs = (props) => {
-  const { todos, selectedTab, setSelectedTab } = props;
-  const tabs = ["All", "Open", "Complete"];
+  const { todos,selectedTab,setSelectedTab } = props;
+  const tabs = ["All", "Open", "Completed"];
   return (
     <nav className="tab-container">
       {tabs.map((tab, tabIndex) => {
@@ -13,11 +13,9 @@ const Tabs = (props) => {
             ? todos.filter(val => !val.complete).length
             : todos.filter(val => val.complete).length;
         return (
-          <button key={tabIndex}
-          onClick={() => {
-            setSelectedTab(tab)
-          }}
-           className={"tab-button" + (tab === selectedTab ? "tab-selected" : '')}>
+          <button onClick={() => {
+            setSelectedTab(tab);
+          }} key={tabIndex} className={"tab-button" + (tab === selectedTab ? "tab-selected" : "")}>
             <h4>
               {tab}
               <span>({numOfTasks})</span>

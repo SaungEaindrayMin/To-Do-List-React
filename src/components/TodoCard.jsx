@@ -8,9 +8,9 @@ const TodoCard = (props) => {
       <p>{todo.input}</p>
       <div className="todo-buttons">
         <button
-          onClick={() => {
-            handlerCompleteTodo(todoList);
-          }}
+        onClick={() => {
+          handlerCompleteTodo(todoList)
+        }}
           disabled={todo.complete}
         >
           <h6>Done</h6>

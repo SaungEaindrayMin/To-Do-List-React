@@ -6,6 +6,13 @@ import TodoCard from "./components/TodoCard";
 import TodoInput from "./components/TodoInput";
 
 const App = () => {
+  // const todos = [
+  //   { input: "Hello! Add your first to do !", complete: true },
+  //   { input: "Hello! Add your first to do !", complete: false },
+  //   { input: "Hello! Add your first to do !", complete: false },
+  //   { input: "Hello! Add your first to do !", complete: true },
+  // ];
+
   const [todos, setTodos] = useState([
     { input: "Hello! Add your first to do !", complete: true },
   ]);
@@ -18,10 +25,14 @@ const App = () => {
     handleSaveTodo(newTodoList)
   }
 
+  function handleSaveTodo (currTodos) {
+    localStorage.setItem("todo-app", JSON.stringify({todos:currTodos}))
+  }
+
   function handlerCompleteTodo(index) {
-    let newTodoList = [...todos];
-    let completedTodo = todos[index];
-    completedTodo["complete"] = true;
+    let newTodoList = [...todos]
+    let completedTodo = todos[index]
+    completedTodo['complete'] = true;
     newTodoList[index] = completedTodo;
     setTodos(newTodoList);
     handleSaveTodo(newTodoList)
@@ -37,17 +48,13 @@ const App = () => {
 
   }
 
-  function handleSaveTodo(currTodos) {
-    localStorage.setItem("todo-app", JSON.stringify({ todos: currTodos }));
-  }
-
   useEffect(() => {
-    if (!localStorage || !localStorage.getItem("todo-app")) {
-      return;
+    if(!localStorage || !localStorage.getItem('todo-app')){
+      return
     }
-    let db = JSON.parse(localStorage.getItem("todo-app"));
+    let db = JSON.parse(localStorage.getItem('todo-app'));
     setTodos(db.todos);
-  }, []);
+  },[]) 
 
   return (
     <>
@@ -60,8 +67,8 @@ const App = () => {
       <TodoList
         todos={todos}
         selectedTab={selectedTab}
-        handlerDeleteTodo={handlerDeleteTodo}
-        handlerCompleteTodo={handlerCompleteTodo}
+        handlerDeleteTodo = {handlerDeleteTodo}
+        handlerCompleteTodo= {handlerCompleteTodo}
       />
       <TodoInput handlerAddTodo={handlerAddTodo} />
     </>
